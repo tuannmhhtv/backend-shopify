@@ -10,6 +10,21 @@
             </li>
 
             <li class="nav-title">
+                Cactus Admin
+            </li>
+
+            <li class="nav-item nav-dropdown open">
+                <a class="nav-link {{ active_class(Active::checkUriPattern('cactus/apps/index')) }}" href="{{ route('admin.cactus.apps.index') }}"><i class="icon-organization"></i> Shopify Apps</a>
+                <ul class="nav-dropdown-items open">
+                    <li class="nav-item">
+                        <a class="nav-link {{ active_class(Active::checkUriPattern('cactus/apps/add')) }}" href="{{ route('admin.cactus.apps.add') }}">
+                            Add New App
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-title">
                 {{ __('menus.backend.sidebar.system') }}
             </li>
 
