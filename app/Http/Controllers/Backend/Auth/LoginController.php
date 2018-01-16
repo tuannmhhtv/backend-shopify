@@ -118,7 +118,7 @@ class LoginController extends Controller
         $this->guard()->logout();
         $request->session()->invalidate();
 
-        return redirect()->route('frontend.index');
+        return redirect()->route('admin.auth.login');
     }
 
     /**
@@ -128,7 +128,7 @@ class LoginController extends Controller
     {
         // If for some reason route is getting hit without someone already logged in
         if (! auth()->user()) {
-            return redirect()->route('frontend.auth.login');
+            return redirect()->route('admin.auth.login');
         }
 
         // If admin id is set, relogin
@@ -149,7 +149,7 @@ class LoginController extends Controller
             // Otherwise logout and redirect to login
             auth()->logout();
 
-            return redirect()->route('frontend.auth.login');
+            return redirect()->route('admin.auth.login');
         }
     }
 }
