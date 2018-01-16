@@ -2,7 +2,7 @@
 @section ('body')
     <?php
     $setting  = unserialize($setting);
-    $setting_saved = $resolution = $feed_limit = $space = $sortby = $open_ig = false;
+    $setting_saved = $resolution = $feed_limit = $space = $sortby = $open_ig = $user_instagram_id = false;
     if (is_array($setting)) {
         $setting_saved = true;
         $resolution = $setting[0];
@@ -10,6 +10,7 @@
         $space = $setting[2];
         $sortby = $setting[3];
         $open_ig = $setting[4];
+        $user_instagram_id = $setting[5];
     }
     ?>
     <main>
@@ -79,6 +80,12 @@
                             </select>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="column">
+                            <label><b>Want to get instagram feed of other public user?, please enter user instagram id here:</b></label>
+                            <input type="text" name="user_instagram_id" placeholder="user id" value="<?php echo ($user_instagram_id == false) ? '' : $user_instagram_id ; ?>">
+                        </div>
+                    </div>
                     <button type="submit">Save &amp; Preview</button>
                 </form>
                 {{--<button type="submit" id="publish" class="btn primary" disabled="">Publish to Store</button><br><br>--}}
@@ -101,7 +108,7 @@
                 <span class="tag grey">&lt;div id="instafeed"&gt;&lt;/div&gt;</span><br><br>
                 Open your homepage file here: <a href="#" onclick="ShopifyApp.redirect('/themes/current/?key=templates/index.liquid');">index.liquid</a> and put the above line of code below all the existing code, press "Save" and you're done!<br><br>
                 <br><br><h5>Having Trouble?</h5>
-                For a full installation tutorial check this <a href="https://youtu.be/o7VHfxrwbR4" target="_blank">video</a> or read our <a id="installationUrl" href="#">Installation Guide</a>.<br><br> For troubleshooting read our <a id="faqUrl" href="#">FAQ</a> or send us an <a href="mailto:support@n3f.me">email</a>.
+                For a full installation tutorial check this <a href="#" target="_blank">video</a> or read our <a id="installationUrl" href="#">Installation Guide</a>.<br><br> For troubleshooting read our <a id="faqUrl" href="#">FAQ</a> or send us an <a href="mailto:hi@cactusthemes.com">email</a>.
             </div>
         </section>
         <section class="full-width" style="padding: 18px 18px 0 18px;">
@@ -155,6 +162,10 @@
                 var space = $("select[name='space'] option:selected").val();
                 var sortby = $("select[name='sortby'] option:selected").val();
                 var open_ig = $("select[name='open_ig'] option:selected").val();
+                var user_instagram_id = $("input[name='user_instagram_id']").val();
+                if (user_instagram_id != '') {
+                    userID = user_instagram_id;
+                }
 
                 var open_tag = '{' + '{';
                 var close_tag = '}' + '}';
