@@ -405,6 +405,10 @@ function IsJsonString(str) {
                 var space = setting[2];
                 var sortby = setting[3];
                 var open_ig = setting[4];
+                var user_instagram_id = setting[5];
+                if (user_instagram_id != '') {
+                    userID = user_instagram_id;
+                }
 
                 var open_tag = '{' + '{';
                 var close_tag = '}' + '}';

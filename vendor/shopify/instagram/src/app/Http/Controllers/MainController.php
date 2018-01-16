@@ -237,6 +237,7 @@ class MainController extends Controller
         $setting[] = $_POST['space'];
         $setting[] = $_POST['sortby'];
         $setting[] = $_POST['open_ig'];
+        $setting[] = $_POST['user_instagram_id'];
 
         $result = Instagram::updateOrCreate(
             ['shop_domain' => $shop_domain],
