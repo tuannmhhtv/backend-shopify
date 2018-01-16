@@ -36,7 +36,9 @@
             "database/factories"
         ],
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "RocketCode\\": "vendor/rocket-code/shopify/src/",
+            "Shopify\\InstagramApp\\": "vendor/shopify/instagram/src/"
         },
         "files": [
             "app/helpers.php"
