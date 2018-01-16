@@ -3,10 +3,11 @@
 Route::group([
     'middleware' => 'admin'
 ], function () {
+
     /**
      * All route names are prefixed with 'admin.'.
      */
-    Route::redirect('/', '/admin/dashboard', 301);
+    Route::redirect('/', '/admin/dashboard');
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 
 
@@ -35,7 +36,21 @@ Route::group([
         });
     });
 
+    Route::group(['namespace' => 'Profile', 'as' => 'profile.'],function(){
+
+        /*
+         * User Account Specific
+         */
+        Route::get('account', 'AccountController@index')->name('account');
+
+        /*
+         * User Profile Specific
+         */
+        Route::patch('profile/update', 'ProfileController@update')->name('update');
+    });
+
 });
+
 
 /**
  * Admin Login
@@ -46,6 +61,7 @@ Route::group(['namespace' => 'Auth', 'as' => 'auth.'], function () {
     * These routes require the user to be logged in
     */
     Route::group(['middleware' => 'auth'], function () {
+
         Route::get('logout', 'LoginController@logout')->name('logout');
 
         //For when admin is logged in as user from backend
@@ -68,6 +84,7 @@ Route::group(['namespace' => 'Auth', 'as' => 'auth.'], function () {
      * These routes require no user to be logged in
      */
     Route::group(['middleware' => 'guest'], function () {
+
         // Authentication Routes
         Route::get('login', 'LoginController@showLoginForm')->name('login');
         Route::post('login', 'LoginController@login')->name('login.post');

@@ -72,6 +72,6 @@ class Handler extends ExceptionHandler
     {
         return $request->expectsJson()
             ? response()->json(['message' => 'Unauthenticated.'], 401)
-            : redirect()->guest(route('frontend.auth.login'));
+            : redirect()->guest(route('admin.auth.login'));
     }
 }

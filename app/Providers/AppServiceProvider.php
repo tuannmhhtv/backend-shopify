@@ -59,7 +59,7 @@ class AppServiceProvider extends ServiceProvider
         \Illuminate\Pagination\AbstractPaginator::defaultView('pagination::bootstrap-4');
         \Illuminate\Pagination\AbstractPaginator::defaultSimpleView('pagination::simple-bootstrap-4');
 
-        \URL::forceScheme('https');
+        //\URL::forceScheme('https');
     }
 
     /**

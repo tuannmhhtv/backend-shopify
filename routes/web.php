@@ -5,14 +5,15 @@
  * Routes that are used between both frontend and backend.
  */
 
-// Switch between the included languages
-Route::get('lang/{lang}', 'LanguageController@swap');
+Route::get('/', function(){
+    return Redirect::to('http://shopeasify.com/');
+});
 
 /*
  * Frontend Routes
  * Namespaces indicate folder structure
  */
-Route::group(['namespace' => 'Frontend', 'as' => 'frontend.'], function () {
+Route::group(['namespace' => 'Frontend', 'prefix' => 'frontend', 'as' => 'frontend.'], function () {
     include_route_files(__DIR__.'/frontend/');
 });
 
