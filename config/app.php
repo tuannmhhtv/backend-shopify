@@ -193,6 +193,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         * Shopify App Service Providers...
+         */
+        RocketCode\Shopify\ShopifyServiceProvider::class,
+        Shopify\InstagramApp\InstagramAppServiceProvider::class,
     ],
 
     /*
