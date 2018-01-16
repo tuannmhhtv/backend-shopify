@@ -31,7 +31,6 @@
 
         <main class="main">
             @include('includes.partials.logged-in-as')
-            {!! Breadcrumbs::render() !!}
 
             <div class="container-fluid">
                 <div class="animated fadeIn">
@@ -44,8 +43,6 @@
                 </div><!--animated-->
             </div><!--container-fluid-->
         </main><!--main-->
-
-        @include('backend.includes.aside')
     </div><!--app-body-->
 
     @include('backend.includes.footer')
