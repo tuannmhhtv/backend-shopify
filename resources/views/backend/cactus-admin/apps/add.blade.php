@@ -3,6 +3,16 @@
 @section ('title', 'Add New Shopify App' )
 
 @section('content')
+
+    @if( isset( $message ) )
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            {{ $message }}
+        </div>
+    @endif
+
 <form class="form-horizontal" enctype="multipart/form-data" action="{{ route('admin.cactus.apps.create') }}" method="post">
     {{ csrf_field() }}
     <div class="card">
@@ -23,7 +33,7 @@
                         <label class="col-md-2 form-control-label" for="name">App Name</label>
 
                         <div class="col-md-10">
-                            <input class="form-control" type="text" name="name" id="name" value="" placeholder="App Name" maxlength="191" required="">
+                            <input class="form-control" type="text" name="name" id="name" value="{{ isset( $request->name ) ? $request->name : '' }}" placeholder="App Name" maxlength="191" required="">
                         </div><!--col-->
                     </div><!--form-group-->
 
@@ -31,7 +41,7 @@
                         <label class="col-md-2 form-control-label" for="url">App URL</label>
 
                         <div class="col-md-10">
-                            <input class="form-control" type="text" name="url" id="url" value="" placeholder="App URL" maxlength="191">
+                            <input class="form-control" type="text" name="url" id="url" value="{{ isset( $request->url ) ? $request->url : '' }}" placeholder="App URL" maxlength="191">
                         </div><!--col-->
                     </div><!--form-group-->
 
@@ -39,15 +49,15 @@
                         <label class="col-md-2 form-control-label" for="api_key">API Key</label>
 
                         <div class="col-md-10">
-                            <input class="form-control" type="text" name="api_key" id="api_key" value="" placeholder="App API Key" maxlength="191" required>
+                            <input class="form-control" type="text" name="api_key" id="api_key" value="{{ isset( $request->api_key ) ? $request->api_key : '' }}" placeholder="App API Key" maxlength="191" required>
                         </div><!--col-->
                     </div><!--form-group-->
 
                     <div class="form-group row">
-                        <label class="col-md-2 form-control-label" for="api_secret">API Key</label>
+                        <label class="col-md-2 form-control-label" for="api_secret">API Secret</label>
 
                         <div class="col-md-10">
-                            <input class="form-control" type="text" name="api_secret" id="api_secret" value="" placeholder="App API Secret" maxlength="191" required>
+                            <input class="form-control" type="text" name="api_secret" id="api_secret" value="{{ isset( $request->api_secret ) ? $request->api_secret : '' }}" placeholder="App API Secret" maxlength="191" required>
                         </div><!--col-->
                     </div><!--form-group-->
 

@@ -16,11 +16,13 @@
                 </h4>
             </div><!--col-->
 
-            <div class="col-sm-7">
-                <div class="btn-toolbar float-right" role="toolbar" aria-label="Toolbar with button groups">
-                    <a href="{{ route('admin.cactus.apps.add') }}" class="btn btn-success ml-1" data-toggle="tooltip" title="" data-original-title="Create New"><i class="fa fa-plus-circle"></i></a>
-                </div>
-            </div><!--col-->
+            @if( $logged_in_user->isAdmin() )
+                <div class="col-sm-7">
+                    <div class="btn-toolbar float-right" role="toolbar" aria-label="Toolbar with button groups">
+                        <a href="{{ route('admin.cactus.apps.add') }}" class="btn btn-success ml-1" data-toggle="tooltip" title="" data-original-title="Create New"><i class="fa fa-plus-circle"></i></a>
+                    </div>
+                </div><!--col-->
+            @endif
         </div><!--row-->
 
         <div class="row mt-4">
@@ -33,7 +35,9 @@
                             <th>URL</th>
                             <th>API Key</th>
                             <th>API Secret</th>
-                            <th>Action</th>
+                            @if( $logged_in_user->isAdmin() )
+                                <th>Action</th>
+                            @endif
                         </tr>
                         </thead>
                         <tbody>
@@ -43,14 +47,20 @@
                                 <td>{{ $app->url }}</td>
                                 <td>{{ $app->api_key }}</td>
                                 <td>{{ $app->api_secret }}</td>
-                                <td>
-                                    <div class="btn-group btn-group-sm" role="group" aria-label="User Actions">
-                                        <a href="{{ $app->edit }}">
-                                            <i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit">
-                                            </i>
-                                        </a>
-                                    </div>
-                                </td>
+                                @if( $logged_in_user->isAdmin() )
+                                    <td>
+                                        <div class="btn-group btn-group-sm" role="group" aria-label="User Actions">
+                                            <a href="{{ $app->edit }}" class="btn btn-primary">
+                                                <i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit">
+                                                </i>
+                                            </a>
+                                            <a href="{{ $app->delete }}" class="btn btn-danger">
+                                                <i class="fa fa-trash">
+                                                </i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
                         </tbody>

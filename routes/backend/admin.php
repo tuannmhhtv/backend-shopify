@@ -21,17 +21,20 @@ Route::group([
         'namespace'  => 'CactusAdmin',
     ], function () {
         Route::group([
-            'middleware' => 'role:administrator',
+            'prefix'     => 'apps',
+            'as'         => 'apps.'
         ], function () {
+
+            Route::get('/', 'AppsAdminController@index')->name('index');
+
             Route::group([
-                'prefix'     => 'apps',
-                'as'         => 'apps.'
+                'middleware' => 'role:administrator'
             ], function(){
-                Route::get('/', 'AppsAdminController@index')->name('index');
                 Route::get('/add', 'AppsAdminController@add')->name('add');
                 Route::post('/add', 'AppsAdminController@create')->name('create');
                 Route::get('{id}/edit', 'AppsAdminController@edit')->name('edit');
                 Route::post('{id}/edit', 'AppsAdminController@update')->name('update');
+                Route::get('{id}/delete', 'AppsAdminController@delete')->name('delete');
             });
         });
     });

@@ -41,9 +41,9 @@ return [
         'enabled'    => true,
 
         'attributes' => [
-            'prefix'     => 'admin/log-viewer',
+            'prefix'     => 'log-viewer',
 
-            'middleware' => ['web', 'admin'],
+            'middleware' => env('ARCANEDEV_LOGVIEWER_MIDDLEWARE') ? explode(',', env('ARCANEDEV_LOGVIEWER_MIDDLEWARE')) : null,
         ],
     ],
 
@@ -90,7 +90,7 @@ return [
      */
 
     'icons' =>  [
-        /*
+        /**
          * Font awesome >= 4.3
          * http://fontawesome.io/icons/
          */

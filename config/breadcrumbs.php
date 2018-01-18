@@ -18,7 +18,7 @@ return [
     |
     */
 
-    'view' => 'backend.includes.partials.breadcrumbs',
+    'view' => 'breadcrumbs::bootstrap4',
 
     /*
     |--------------------------------------------------------------------------
@@ -51,5 +51,20 @@ return [
 
     // When a named breadcrumb is used but doesn't exist (InvalidBreadcrumbException)
     'invalid-named-breadcrumb-exception' => true,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Classes
+    |--------------------------------------------------------------------------
+    |
+    | Subclass the default classes for more advanced customisations.
+    |
+    */
+
+    // Manager
+    'manager-class' => DaveJamesMiller\Breadcrumbs\BreadcrumbsManager::class,
+
+    // Generator
+    'generator-class' => DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator::class,
 
 ];

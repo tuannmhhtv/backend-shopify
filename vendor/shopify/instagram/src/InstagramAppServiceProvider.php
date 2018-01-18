@@ -31,9 +31,9 @@ class InstagramAppServiceProvider extends ServiceProvider
     {
         // LOAD THE VIEWS
         // - first the published views (in case they have any changes)
-        $this->loadViewsFrom(resource_path('views/vendor/instagram/base'), 'instagram');
+        $this->loadViewsFrom( resource_path('views/vendor/instagram/base'), config('shopify.instagram.view_prefix') );
         // - then the stock views that come with the package, in case a published view might be missing
-        $this->loadViewsFrom(realpath(__DIR__.'/resources/views'), 'instagram');
+        $this->loadViewsFrom( realpath(__DIR__.'/resources/views'), config('shopify.instagram.view_prefix') );
 
         // publish views
         $this->publishes([__DIR__.'/resources/views' => base_path('resources/views')], 'views');

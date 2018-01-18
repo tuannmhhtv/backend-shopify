@@ -13,17 +13,23 @@
                 Cactus Admin
             </li>
 
-            <li class="nav-item nav-dropdown open">
+            <li class="nav-item nav-dropdown {{ $logged_in_user->isAdmin() ? 'open' : '' }}">
                 <a class="nav-link {{ active_class(Active::checkUriPattern('cactus/apps/index')) }}" href="{{ route('admin.cactus.apps.index') }}"><i class="icon-organization"></i> Shopify Apps</a>
-                <ul class="nav-dropdown-items open">
-                    <li class="nav-item">
-                        <a class="nav-link {{ active_class(Active::checkUriPattern('cactus/apps/add')) }}" href="{{ route('admin.cactus.apps.add') }}">
-                            Add New App
-                        </a>
-                    </li>
-                </ul>
+                @if( $logged_in_user->isAdmin() )
+                    <ul class="nav-dropdown-items open">
+                        <li class="nav-item">
+                            <a class="nav-link {{ active_class(Active::checkUriPattern('cactus/apps/add')) }}" href="{{ route('admin.cactus.apps.add') }}">
+                                Add New App
+                            </a>
+                        </li>
+                    </ul>
+                @endif
             </li>
 
+            <!-- Shopify App Setting section -->
+            @include('backend.includes.partials.apps-settings')
+
+            <!-- System Setting section -->
             <li class="nav-title">
                 {{ __('menus.backend.sidebar.system') }}
             </li>
@@ -31,7 +37,7 @@
             @if ($logged_in_user->isAdmin())
                 <li class="nav-item nav-dropdown {{ active_class(Active::checkUriPattern('admin/auth*'), 'open') }}">
                     <a class="nav-link nav-dropdown-toggle" href="#">
-                        <i class="icon-people"></i> {{ __('menus.backend.access.title') }}
+                        <i class="icon-user"></i> {{ __('menus.backend.access.title') }}
 
                         @if ($pending_approval > 0)
                             <span class="badge badge-danger">{{ $pending_approval }}</span>
@@ -74,12 +80,6 @@
                         </a>
                     </li>
                 </ul>
-
-                <li class="nav-item">
-                    <a class="nav-link {{ active_class(Active::checkUriPattern('admin/account')) }}" href="{{ route('admin.profile.account') }}">
-                        <i class="icon-user"></i>My Account
-                    </a>
-                </li>
             </li>
         </ul>
     </nav>
