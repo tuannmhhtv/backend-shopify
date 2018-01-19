@@ -62,6 +62,26 @@ class AppsAdminController extends Controller
 
         if( $request->_token == csrf_token() ){
 
+            //slugify app name
+            $request->name = strtolower( trim( $request->name ) );
+            $request->name = preg_replace( '/\W\W+/', '-', $request->name );
+            $request->name = preg_replace( '/\s+/', '-', $request->name );
+
+            DB::table('apps')->insert([
+                'name'       => $request->name,
+                'url'        => trim( $request->url ),
+                'api_key'    => trim( $request->api_key ),
+                'api_secret' => trim( $request->api_secret )
+            ]);
+
+            //get inserted app
+            $app = DB::table('apps')->where([
+                'name'       => $request->name,
+                'url'        => trim( $request->url ),
+                'api_key'    => trim( $request->api_key ),
+                'api_secret' => trim( $request->api_secret )
+            ]);
+
             if( $request->hasFile('sql') ){
 
                 $sql = file_get_contents( $request->sql->getRealPath() );
@@ -93,38 +113,36 @@ class AppsAdminController extends Controller
                     }
                 }
 
-                // try {
-                //    $result = DB::unprepared( $sql );
-                // } catch (Exception $e) {
-                //     if( !empty( $tables ) ){
-                //         //remove inserted table
-                //         foreach( $tables as $table ){
-                //             try {
-                //                 DB::statement('DROP TABLE `' . $table . '`;');
-                //             } catch (Exception $e) {
-                //                 //thrown exception
-                //             }
-                //         }
-                //
-                //         $message = "Cannot import SQL file successfully";
-                //
-                //         return view('backend.cactus-admin.apps.add', compact( 'request', 'message' ) );
-                //     }
-                // }
+                try {
+                    //update tables column for app
+                    $app->update( [ 'tables' => serialize( $tables ) ] );
+
+                    $result = DB::unprepared( $sql );
+                } catch (Exception $e) {
+
+                    if( !empty( $tables ) ){
+                        //remove inserted table
+                        foreach( $tables as $table ){
+                            try {
+                                DB::statement('DROP TABLE `' . $table . '`;');
+                            } catch (Exception $e) {
+                                //thrown exception
+                            }
+                        }
+                    }
+
+                    //delete inserted row above
+                    $app->delete();
+
+                    $message = "Cannot import SQL file successfully";
+
+                    return view('backend.cactus-admin.apps.add', compact( 'request', 'message' ) );
+
+                }
 
             }
 
-            //slugify app name
-            $request->name = strtolower( trim( $request->name ) );
-            $request->name = preg_replace( '/\W\W+/', '-', $request->name );
-            $request->name = preg_replace( '/\s+/', '-', $request->name );
 
-            $result = DB::table('apps')->insert([
-                'name'       => $request->name,
-                'url'        => trim( $request->url ),
-                'api_key'    => trim( $request->api_key ),
-                'api_secret' => trim( $request->api_secret )
-            ]);
 
         }
 

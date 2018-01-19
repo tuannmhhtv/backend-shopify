@@ -12,7 +12,7 @@
 */
 
 Route::group([
-    'prefix' => config('shopify.instagram.route_prefix'),
+    'prefix' => config('shopify.instagram.prefix'),
     'middleware' => ['web'],
     'namespace' => 'Shopify\InstagramApp\app\Http\Controllers',
 ], function () {

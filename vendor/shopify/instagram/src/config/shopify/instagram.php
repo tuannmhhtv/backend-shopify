@@ -46,10 +46,8 @@ return [
     */
 
     // The prefix used in all base routes (the 'admin' in admin/dashboard)
-    'route_prefix' => 'instagram',
-
-    // The prefix for view
-    'view_prefix' => 'instagram',
+    // This prefix should be used for app routes, app views, app tables
+    'prefix' => 'instagram',
 
     /*
     |--------------------------------------------------------------------------

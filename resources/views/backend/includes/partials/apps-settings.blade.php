@@ -13,7 +13,7 @@
 </li>
 
 @foreach( $s_apps as $app )
-    @if( isset( $app['view_prefix'] ) )
-        @include( $app['view_prefix'] . '::admin-settings.menu-setting')        
+    @if( isset( $app['prefix'] ) )
+        @include( $app['prefix'] . '::admin-settings.menu-setting')
     @endif
 @endforeach
